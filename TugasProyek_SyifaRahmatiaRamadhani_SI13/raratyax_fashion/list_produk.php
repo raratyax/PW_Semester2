@@ -1,0 +1,79 @@
+<?php 
+    include_once('database.php');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raratyax Fashion</title>
+    <link rel="icon" href="images/logora.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
+	<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+</head>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4"></h1>
+            <h3><a class="nav-link" href="dashboard1.php" style="color: #48f542">Data Produk</a></h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header"><h5>List Produk</h5></div>
+                            <div class="card-body">
+                                <table class="table mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Kode</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Harga Jual</th>
+                                            <th scope="col">Harga Beli</th>
+                                            <th scope="col">Stok</th>
+                                            <th scope="col">Min Stok</th>
+                                            <th scope="col">Deskripsi</th>
+                                            <th scope="col">Kategori ID</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php  
+                                        $data = $db->query("SELECT * FROM tb_produk");
+                                        foreach ($data as $d):
+                                        ?>
+                                    <tr>           
+                                        <td><?= $d['id']?></td>            
+                                        <td><?= $d['kode']?></td>                 
+                                        <td><?= $d['nama']?></td>
+                                        <td><?= $d['harga_jual']?></td>
+                                        <td><?= $d['harga_beli']?></td>
+                                        <td><?= $d['stok']?></td>
+                                        <td><?= $d['min_stok']?></td>
+                                        <td><?= $d['deskripsi']?></td>
+                                        <td><?= $d['nama']?></td>
+                                        <td>
+                                            <a href="delete_produk.php?id=<?= $d['id']; ?>" class="btn btn-success">HAPUS</a>
+                                            <a href="form_update_produk.php?id=<?= $d['id']; ?>"class="btn btn-success">EDIT</a>
+                                        </td>
+                                    </tr>
+                                        <?php 
+                                        endforeach;
+                                        ?>                       
+                                    </tbody>
+                                </table>
+                                <a href="form_produk.php" class="btn btn-success mt-4">Input Baru</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<?php include_once('footer.php'); ?>
+
+
